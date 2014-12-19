@@ -19,10 +19,10 @@ SERVEREXE=openerp-server
 
 LOG=TRUE
 # path al directorio de instancias de OpenERP
-OERPPATH=/home/user/openerp
+OERPPATH=/home/user/odoo
  
 # Default OpenERP server python executable
-DAEMON=/home/user/openerp/server/openerp-server
+DAEMON=/home/user/odoo/openerp-server
  
 # Default server config file
 CONFIGFILE=/etc/openerp_producc.conf
