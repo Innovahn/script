@@ -7,12 +7,12 @@
 
 ## BEGIN CONFIG ##
 BACKUP_DIR="/var/backups/postgres/" #Dirección donde se guardaran
-USER= user
+USER= ggarcia
 FECHA=$(date +%d-%m-%Y)
 FECHA_BORRADO=$(date +%d-%m-%Y --date='15 days ago')
 BACKUP_DIR_TODAY=$BACKUP_DIR$FECHA/
 ## END CONFIG ##
-export PGPASSWORD= password
+export PGPASSWORD= larach
 
 if [ ! -d $BACKUP_DIR ]; then
 mkdir -p $BACKUP_DIR
@@ -24,11 +24,11 @@ mkdir $BACKUP_DIR_TODAY
 fi
 
 #Leemos todas la bases de datos existente en Postgres, para despues realizar la copia una a una
-POSTGRE_DBS=$(psql -U user -l | awk '(NR > 2) && (/[a-zA-Z0-9]+[ ]+[|]/) && ( $0 !~ /template[0-9]/) { print $1 }');
+POSTGRE_DBS=$(psql -U ggarcia -l | awk '(NR > 2) && (/[a-zA-Z0-9]+[ ]+[|]/) && ( $0 !~ /template[0-9]/) { print $1 }');
 #Realizamos la copia de seguridad de cada una de ellas y las guardamos en un directorio de backups
 for DB in $POSTGRE_DBS ; do
 echo "* Backuping PostgreSQL data from $DB@$HOST ..."
-pg_dump -U user --format=c -f $BACKUP_DIR_TODAY$DB.dump $DB
+pg_dump -U ggarcia --format=c -f $BACKUP_DIR_TODAY$DB.dump $DB
 
 #Borramos las copias con una antiguedad mayor a 15 dias
 rm -rf $BACKUP_DIR$FECHA_BORRADO
